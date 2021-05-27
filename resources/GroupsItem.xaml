@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls">
+    <Style x:Key="GroupsItem"
+           TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="DataContext" Value="Item"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <WrapPanel IsItemsHost="True"
+                               Background="Transparent"
+                               Orientation="Horizontal"
+                               />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Premium}" Value="False">
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Premium}" Value="True">
+                            <Setter Property="BorderBrush" Value="#b89c3a"/>
+                        </DataTrigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderBrush" Value="#3382c9"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                    <Setter Property="Background" Value="#91969f"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="ItemBorder"
+                                        BorderThickness="4"
+                                        Focusable="False"
+                                        FocusVisualStyle="{x:Null}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        Background="{TemplateBinding Background}"
+                                        Margin="0 0 25 25">
+                                    <Image Width="128"
+                                           Height="128"
+                                           Source="{Binding SmallImage}"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

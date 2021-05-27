@@ -1,0 +1,27 @@
+﻿<Application x:Class="Pandora.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:serviceLocator="clr-namespace:Pandora.DI"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--MahApps Resources-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+
+                <!--MenuButtons-->
+                <ResourceDictionary Source="Resources/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Resources/SearchTextBox.xaml"/>
+                <ResourceDictionary Source="Resources/LoginButtonStyle.xaml"/>
+                <ResourceDictionary Source="Resources/GroupsItem.xaml"/>
+                <ResourceDictionary Source="Resources/TextBox.xaml"/>
+                <ResourceDictionary Source="Resources/Button.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <serviceLocator:LocalServiceLocator x:Key="Locator"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
