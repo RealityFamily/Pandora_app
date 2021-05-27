@@ -9,9 +9,7 @@ namespace Pandora._3Ds_Max.Core
     class MaxDetectionInRegistry
     {
         private readonly string MaxHKLMKeys = "SOFTWARE\\Autodesk\\3dsMax";
-        private readonly string MaxServicePacksHKLMKeys = "SOFTWARE\\Autodesk\\Autodesk 3ds Max 2018\\2018\\Service Packs";
         private readonly string MaxLocationKeyName = "Location";
-        private readonly string MaxPatchTitleKeyName = "PatchTitle";
         private readonly IRegistryProvider registryProvider;
 
         public MaxDetectionInRegistry()

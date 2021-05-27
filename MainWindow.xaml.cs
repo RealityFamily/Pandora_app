@@ -51,7 +51,7 @@ namespace Pandora
 
         private void PersonName_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(new LocalServiceLocator().UserViewModel.Token.Value)) {
+            if (string.IsNullOrEmpty(new LocalServiceLocator().UserViewModel.Token.Value) && new LocalServiceLocator().ApplicationConfig.HasMax()) {
                 mViewModel.Content.Value = new AuthPage();
             }
         }

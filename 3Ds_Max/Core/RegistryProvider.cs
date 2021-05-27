@@ -47,6 +47,7 @@ namespace Pandora._3Ds_Max.Core
                 foreach (string subKeyName in registryKey.GetSubKeyNames())
                 {
                     result = (T)registryKey.OpenSubKey(subKeyName).GetValue(valueName, null);
+                    if (result != null) break;
                 }
             }
             
