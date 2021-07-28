@@ -12,46 +12,14 @@ namespace Pandora.Network
     {
         public static List<Group> GetGroups()
         {
-            WebClient client = new WebClient();
-
-            client.Headers["Authorization"] = "Bearer " + new LocalServiceLocator().UserViewModel.Token.Value;
-
-            List<Group> groups = new List<Group>();
-            try { 
-                groups = JsonSerializer.Deserialize<List<Group>>(client.DownloadString(BaseURL + "api/v1/client/category/all"));
-            } 
-            catch (WebException we)
-            {
-                if ((we.Response as HttpWebResponse).StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    AuthNetworkLogic.Refresh();
-                    groups = JsonSerializer.Deserialize<List<Group>>(client.DownloadString(BaseURL + "api/v1/client/category/all"));
-                }
-            }
+            List<Group> groups = DownloadString<List<Group>>("api/v1/client/category/all") ?? new List<Group>();
 
             return groups;
         }
 
         public static List<Group> GetSubGroups(string id)
         {
-            WebClient client = new WebClient();
-
-            client.Headers["Authorization"] = "Bearer " + new LocalServiceLocator().UserViewModel.Token.Value;
-
-            
-            List<Group> groups = new List<Group>();
-            try
-            {
-                groups = JsonSerializer.Deserialize<List<Group>>(client.DownloadString(BaseURL + "api/v1/client/category/" + id + "/subcategories"));
-            }
-            catch (WebException we)
-            {
-                if ((we.Response as HttpWebResponse).StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    AuthNetworkLogic.Refresh();
-                    groups = JsonSerializer.Deserialize<List<Group>>(client.DownloadString(BaseURL + "api/v1/client/category/" + id + "/subcategories"));
-                }
-            }
+            List<Group> groups = DownloadString<List<Group>>("api/v1/client/category/" + id + "/subcategories") ?? new List<Group>();
 
             return groups;
         }

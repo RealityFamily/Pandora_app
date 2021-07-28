@@ -31,6 +31,10 @@ namespace Pandora._3Ds_Max.Core
             RegistryHive hKey = RegistryHive.CurrentUser,
             RegistryView view = RegistryView.Default);
 
-        TryResult TryDeleteValueHKCU(string subKey, string valueName, bool throwOnMissing);
+        TryResult TryDeleteValue(
+            string key,
+            string valueName,
+            RegistryHive hKey = RegistryHive.CurrentUser,
+            RegistryView view = RegistryView.Default);
     }
 }

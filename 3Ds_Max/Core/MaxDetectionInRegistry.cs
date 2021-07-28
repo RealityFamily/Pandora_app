@@ -20,7 +20,7 @@ namespace Pandora._3Ds_Max.Core
         public TryResult<bool> Detect()
         {
             bool flag = false;
-            TryGetResult<string> tryGetResult1 = this.registryProvider.TryGetValue<string>(this.MaxHKLMKeys, this.MaxLocationKeyName, RegistryHive.LocalMachine, RegistryView.Registry64);
+             TryGetResult<string> tryGetResult1 = this.registryProvider.TryGetValue<string>(this.MaxHKLMKeys, this.MaxLocationKeyName, RegistryHive.LocalMachine, RegistryView.Registry64);
             return new TryResult<bool>(tryGetResult1.IsFound && File.Exists(Path.Combine(tryGetResult1.Value, "3dsmax.exe")));
         }
     }

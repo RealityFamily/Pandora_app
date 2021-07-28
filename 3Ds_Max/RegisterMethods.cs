@@ -46,5 +46,11 @@ namespace Pandora._3Ds_Max
                 return default(T);
             }
         }
+
+        public bool CleanValueFromProg(string valueName)
+        {
+            var check = provider.TryDeleteValue(ProgRegistryKey, valueName);
+            return !check.IsFaulted;
+        }
     }
 }

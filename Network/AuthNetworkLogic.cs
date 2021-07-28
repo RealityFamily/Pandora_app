@@ -10,7 +10,7 @@ namespace Pandora.Network
 {
     class AuthNetworkLogic : NetworkLogic
     {
-        public static void Auth(string login, string password)
+        public static bool Auth(string login, string password)
         {
             WebClient client = new WebClient();
 
@@ -20,21 +20,37 @@ namespace Pandora.Network
             body.Add("username", login);
             body.Add("password", password);
 
-            string response = client.UploadString(new Uri(BaseURL + "authenticate"), JsonSerializer.Serialize(body));
+            try
+            {
+                string response = client.UploadString(new Uri(BaseURL + "authenticate"), JsonSerializer.Serialize(body));
 
-            new LocalServiceLocator().ApplicationConfig.AddAuth(
-                JsonSerializer.Deserialize<Dictionary<string, string>>(response)["token"],
-                JsonSerializer.Deserialize<Dictionary<string, string>>(response)["username"]
-                );
+                new LocalServiceLocator().ApplicationConfig.AddAuth(
+                    JsonSerializer.Deserialize<Dictionary<string, string>>(response)["token"],
+                    JsonSerializer.Deserialize<Dictionary<string, string>>(response)["username"]
+                    );
+
+                return true;
+            } catch (WebException web)
+            {
+                return false;
+            }
         }
 
-        public static void Refresh()
+        public static bool Refresh()
         {
             WebClient client = new WebClient();
 
             client.Headers["Authorization"] = "Bearer " + new LocalServiceLocator().UserViewModel.Token.Value;
 
-            new LocalServiceLocator().ApplicationConfig.RefreshAuth(JsonSerializer.Deserialize<Dictionary<string, string>>(client.DownloadString(new Uri(BaseURL + "refresh")))["token"]);
+            try
+            {
+                new LocalServiceLocator().ApplicationConfig.RefreshAuth(JsonSerializer.Deserialize<Dictionary<string, string>>(client.DownloadString(new Uri(BaseURL + "refresh")))["token"]);
+                return true;
+            } catch (WebException webEx)
+            {
+                new LocalServiceLocator().UserViewModel.Token.Value = null;
+                return false;
+            }
         }
     }
 }

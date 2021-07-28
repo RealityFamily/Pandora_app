@@ -40,6 +40,12 @@ namespace Pandora.MVVM.ViewModels
             };
         }
 
+        public void LogOut()
+        {
+            new LocalServiceLocator().ApplicationConfig.CleanAuth();
+            Content.Value = new AuthPage();
+        }
+
         public ObservableObject<Page> Content
         {
             get { return _content; }

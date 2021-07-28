@@ -73,5 +73,10 @@ namespace Pandora._3Ds_Max
                 return false;
             }
         }
+
+        public bool CleanAuth()
+        {
+            return _registerMethods.CleanValueFromProg("Token");
+        }
     }
 }

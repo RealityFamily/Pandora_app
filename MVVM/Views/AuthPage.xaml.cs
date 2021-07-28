@@ -77,7 +77,7 @@ namespace Pandora.MVVM.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(UsernameTextBox.Text) && !string.IsNullOrEmpty(PasswordTextBox.Text)) {
-                AuthNetworkLogic.Auth(UsernameTextBox.Text, PasswordTextBox.Text);
+                InvalidCredentionals.Visibility = !AuthNetworkLogic.Auth(UsernameTextBox.Text, PasswordTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Pandora.Core;
+using Pandora.DI;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,17 @@ namespace Pandora.MVVM.ViewModels
     {
         private ObservableObject<string> _token = new ObservableObject<string>();
         private ObservableObject<string> _user = new ObservableObject<string>();
+
+        public UserViewModel()
+        {
+            _token.PropertyChanged += (sender, e) => {
+                if (string.IsNullOrEmpty(_token.Value))
+                {
+                    new LocalServiceLocator().ApplicationConfig.CleanAuth(); 
+                    new LocalServiceLocator().MainWindow.Content.Value = new Views.AuthPage();
+                }
+            };
+        }
 
         public ObservableObject<string> Token
         {

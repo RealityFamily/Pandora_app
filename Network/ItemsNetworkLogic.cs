@@ -15,34 +15,21 @@ namespace Pandora.Network
     {
         public static Dictionary<string, List<Item>> GetItems(string subGroupId)
         {
-            WebClient client = new WebClient();
-
-            client.Headers["Authorization"] = "Bearer " + new LocalServiceLocator().UserViewModel.Token.Value;
-
             Dictionary<string, List<Item>> items = new Dictionary<string, List<Item>>();
 
-            try
-            {
-                List<ItemTag> tags = JsonSerializer.Deserialize<List<ItemTag>>(client.DownloadString(BaseURL + "api/v1/client/item/bysubgroup/" + subGroupId));
+            List<ItemTag> tags = DownloadString<List<ItemTag>>("api/v1/client/item/bysubgroup/" + subGroupId);
 
-                if (tags != null && tags.Count > 0) {
-                    foreach (ItemTag tag in tags)
-                    {
-                        if (tag.Title.Equals("Main") || tag.Title.Equals("main") || tag.Title.Equals(""))
-                        {
-                            items[""].AddRange(tag.Items);
-                        }
-                        else
-                        {
-                            items.Add(tag.Title, tag.Items);
-                        }
-                    }
-                }
-            } catch (WebException we)
-            {
-                if ((we.Response as HttpWebResponse).StatusCode == HttpStatusCode.Unauthorized)
+            if (tags != null && tags.Count > 0) {
+                foreach (ItemTag tag in tags)
                 {
-                    AuthNetworkLogic.Refresh();
+                    if (tag.Title.Equals("Main") || tag.Title.Equals("main") || tag.Title.Equals(""))
+                    {
+                        items.Add("", tag.Items);
+                    }
+                    else
+                    {
+                        items.Add(tag.Title, tag.Items);
+                    }
                 }
             }
 
@@ -51,24 +38,7 @@ namespace Pandora.Network
 
         public static Item GetItemInfo(string itemId)
         {
-            WebClient client = new WebClient();
-
-            client.Headers["Authorization"] = "Bearer " + new LocalServiceLocator().UserViewModel.Token.Value;
-
-           Item item = null;
-
-            try
-            {
-                item = JsonSerializer.Deserialize<Item>(client.DownloadString(BaseURL + "api/v1/client/item/" + itemId));
-            }
-            catch (WebException we)
-            {
-                if ((we.Response as HttpWebResponse).StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    AuthNetworkLogic.Refresh();
-                    item = JsonSerializer.Deserialize<Item>(client.DownloadString(BaseURL + "api/v1/client/item/" + itemId));
-                }
-            }
+            Item item = DownloadString<Item>("api/v1/client/item/" + itemId);
 
             return item;
         }

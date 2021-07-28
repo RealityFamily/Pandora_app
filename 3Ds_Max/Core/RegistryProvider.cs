@@ -5,8 +5,6 @@ namespace Pandora._3Ds_Max.Core
 {
     public class RegistryProvider : IRegistryProvider
     {
-        private readonly string HKCUName = "HKEY_CURRENT_USER\\";
-
         public TryGetResult<bool> TryGetKey(
             string rootKeyName,
             string keyName,
@@ -105,17 +103,22 @@ namespace Pandora._3Ds_Max.Core
             return new TryResult();
         }
 
-        public TryResult TryDeleteValueHKCU(
-          string subKey,
-          string valueName,
-          bool throwOnMissing)
+        public TryResult TryDeleteValue(
+            string key,
+            string valueName,
+            RegistryHive hKey,
+            RegistryView view)
         {
             try
             {
-                if (subKey.StartsWith(this.HKCUName))
-                    subKey = subKey.Remove(0, this.HKCUName.Length);
-                using (RegistryKey registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(subKey, true))
-                    registryKey?.DeleteValue(valueName, throwOnMissing);
+                RegistryKey registryKey = RegistryKey.OpenBaseKey(hKey, view);
+
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    registryKey = registryKey.OpenSubKey(key, true);
+                }
+
+                registryKey.DeleteValue(valueName, true);
             }
             catch (Exception ex)
             {
