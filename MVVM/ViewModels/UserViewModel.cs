@@ -16,10 +16,17 @@ namespace Pandora.MVVM.ViewModels
             _token.PropertyChanged += (sender, e) => {
                 if (string.IsNullOrEmpty(_token.Value))
                 {
+                    new LocalServiceLocator().ItemInfoViewModel.ChoosedItem.Value = null;
                     new LocalServiceLocator().ApplicationConfig.CleanAuth(); 
                     new LocalServiceLocator().MainWindow.Content.Value = new Views.AuthPage();
                 }
             };
+        }
+
+        public void LogOut()
+        {
+            _token.Value = null;
+            _user.Value = "Войдите для полного доступа к моделям";
         }
 
         public ObservableObject<string> Token

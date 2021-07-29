@@ -21,7 +21,16 @@ namespace Pandora.DI
                 SimpleIoc.Default.Register<ApplicationConfig>();
                 SimpleIoc.Default.Register<UserViewModel>(); 
                 SimpleIoc.Default.Register<ItemInfoViewModel>();
+                SimpleIoc.Default.Register<UploadViewModel>();
 
+            }
+        }
+
+        public UploadViewModel UploadViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UploadViewModel>();
             }
         }
 

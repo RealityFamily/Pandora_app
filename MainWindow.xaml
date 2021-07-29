@@ -11,8 +11,8 @@
                   Background="#FF222C3F"
                   
                   WindowStartupLocation="CenterScreen"
-                  MinHeight="200" 
-                  MinWidth="1052"
+                  MinHeight="960" 
+                  MinWidth="1707"
                   
                   DataContext="{Binding MainWindow, Source={StaticResource Locator}}">
     <mah:MetroWindow.IconTemplate>
@@ -50,15 +50,28 @@
             <StackPanel Grid.Column="1"
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
-                <TextBlock x:Name="ClientName"/>
-                <Button x:Name="PersonName"
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="AddButton"
+                        Style="{StaticResource AddButtonKey}"
+                        Click="AddButton_Click"
+                        Content="Добавить модель в систему">
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="Background" Color="Transparent"/>
+                            <SolidColorBrush x:Key="Foreground" Color="White"/>
+                        </Button.Resources>
+                     </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="PersonName"
                         Style="{StaticResource LoginButtonKey}"
                         Click="PersonName_Click">
-                    <Button.Resources>
-                        <SolidColorBrush x:Key="Background" Color="Transparent"/>
-                        <SolidColorBrush x:Key="Foreground" Color="White"/>
-                    </Button.Resources>
-                </Button>
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="Background" Color="Transparent"/>
+                            <SolidColorBrush x:Key="Foreground" Color="White"/>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
 

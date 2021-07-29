@@ -4,6 +4,7 @@ using Pandora.MVVM.ViewModels;
 using Pandora.MVVM.Views;
 using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Pandora
 {
@@ -29,7 +30,11 @@ namespace Pandora
             };
 
             PersonName.Content = serviceLocator.UserViewModel.User.Value;
-            serviceLocator.UserViewModel.User.PropertyChanged += (sender, e) => { PersonName.Content = serviceLocator.UserViewModel.User.Value; };
+            serviceLocator.UserViewModel.User.PropertyChanged += (sender, e) => 
+            { 
+                PersonName.Content = serviceLocator.UserViewModel.User.Value;
+                AddButton.Visibility = serviceLocator.UserViewModel.User.Value == "realityfamily" ? Visibility.Visible : Visibility.Collapsed;
+            };
 
             serviceLocator.ItemInfoViewModel.ChoosedItem.PropertyChanged += (sender, e) =>
             {
@@ -40,7 +45,18 @@ namespace Pandora
         private void PersonName_Click(object sender, RoutedEventArgs e)
         {
             if (new LocalServiceLocator().ApplicationConfig.HasMax()) {
-                mViewModel.LogOut();
+                new LocalServiceLocator().UserViewModel.LogOut();
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            new LocalServiceLocator().ItemInfoViewModel.ChoosedItem.Value = null;
+            if (mViewModel.Content.Value is UploadPage) {
+                mViewModel.Content.Value = new GroupPage(Color.FromArgb(255, 34, 44, 63), Color.FromArgb(255, 45, 55, 73), new LocalServiceLocator().MainPage.Groups);
+            } else
+            {
+                mViewModel.Content.Value = new UploadPage();
             }
         }
     }

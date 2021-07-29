@@ -11,9 +11,9 @@
 	try(CoronaRenderType = CoronaRenderer.getRenderType())catch() -- For For Corona 1.6 and higher.
 	if CoronaRenderType == -1 then try(IsRendering = CoronaRenderer.isRendering())catch() -- For Corona 1.5.
 	
-	if IsRendering or (CoronaRenderType == 1) then PushPrompt "Can't merge model during rendering.\nPlease stop render and try again." --Title:"3D Hamster"
+	if IsRendering or (CoronaRenderType == 1) then PushPrompt "Can't merge model during rendering.\nPlease stop render and try again." --Title:"Pandora"
 	else (
-		if not CoronaInstalled then continueMerge = (queryBox "Corona Render is not installed.\nOther renderers not supported at this moment.\nMerge model?" Title:"3D Hamster")
+		if not CoronaInstalled then continueMerge = (queryBox "Corona Render is not installed.\nOther renderers not supported at this moment.\nMerge model?" Title:"Pandora")
 		if continueMerge then (
 			if sFile == undefined then (pushprompt "Max file not found.") -- Checking max file.
 			else (

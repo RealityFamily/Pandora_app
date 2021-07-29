@@ -36,7 +36,7 @@ namespace Pandora.MVVM.Views
             {
                 ItemName.Text = mViewModel.ChoosedItem.Value?.Name;
                 AuthorText.Text = mViewModel.ChoosedItem.Value?.Author;
-                WeightText.Text = mViewModel.ChoosedItem.Value?.Size.ToString();
+                WeightText.Text = (mViewModel.ChoosedItem.Value?.Size / 1024 / 1024).ToString() + " Мб";
                 DescriptionText.Text = mViewModel.ChoosedItem.Value?.Description;
                 largePhoto.Source = mViewModel.ChoosedItem.Value?.LargeImage;
 

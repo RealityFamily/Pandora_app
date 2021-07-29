@@ -74,9 +74,11 @@ namespace Pandora._3Ds_Max
             }
         }
 
-        public bool CleanAuth()
+        public void CleanAuth()
         {
-            return _registerMethods.CleanValueFromProg("Token");
+            _registerMethods.CleanValueFromProg("Token"); 
+            _registerMethods.CleanValueFromProg("User");
+
         }
     }
 }

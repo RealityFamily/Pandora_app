@@ -15,7 +15,6 @@
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}"
                                                 BorderBrush="Transparent"
-                                                Margin="5 0 0 0"
                                                 Padding="10">
 
                         <TextBlock TextAlignment="Center"

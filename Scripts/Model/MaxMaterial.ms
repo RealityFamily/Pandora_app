@@ -2,14 +2,14 @@
     local materialPath = @"{ModelPath}" -- Path to ASSET FOLDER.
     local IsRendering = false
     local CoronaRenderType = -1
-    if not classof CoronaRenderer == RendererClass then messageBox "Corona Render не установлена.\nНа данный момент другие рендеры не поддерживаются." Title:"3D Hamster"
+    if not classof CoronaRenderer == RendererClass then messageBox "Corona Render не установлена.\nНа данный момент другие рендеры не поддерживаются." Title:"Pandora"
 	else(
         --Checking for active rendering:
         try(IsRendering = maxOps.isRenderActive)catch() -- For Max 2016 and higher.
         try(CoronaRenderType = CoronaRenderer.getRenderType())catch() -- For For Corona 1.6 and higher.
         if CoronaRenderType == -1 then try(IsRendering = CoronaRenderer.isRendering())catch() -- For Corona 1.5.
         
-        if IsRendering or (CoronaRenderType == 1) then PushPrompt "Can't add material during rendering.\nPlease stop render and try again." --Title:"3D Hamster"
+        if IsRendering or (CoronaRenderType == 1) then PushPrompt "Can't add material during rendering.\nPlease stop render and try again." --Title:"Pandora"
         else (
             /* fn resacleCustomAttribute objArr multiplier targetAttributeName:"Map_Size" targetAttributeProperty:"SizeTexture" = ( -- Custom attribute rescale function.
 	

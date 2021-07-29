@@ -20,7 +20,7 @@ namespace Pandora.MVVM.ViewModels
             if (locator.ApplicationConfig.HasMax())
             {
                 if (!locator.ApplicationConfig.CheckAuth()) {
-                    locator.UserViewModel.User.Value = "Войдите для полного доступа к моделям";
+                    locator.UserViewModel.LogOut();
                     _content.Value = new AuthPage();
                 } else
                 {
@@ -33,17 +33,11 @@ namespace Pandora.MVVM.ViewModels
 
             locator.UserViewModel.Token.PropertyChanged += (sender, e) =>
             {
-                if (_content.Value is AuthPage)
+                if (_content.Value is AuthPage && !string.IsNullOrEmpty(locator.UserViewModel.Token.Value))
                 {
                     _content.Value = new GroupPage(Color.FromArgb(255, 34, 44, 63), Color.FromArgb(255, 45, 55, 73), locator.MainPage.Groups);
                 }
             };
-        }
-
-        public void LogOut()
-        {
-            new LocalServiceLocator().ApplicationConfig.CleanAuth();
-            Content.Value = new AuthPage();
         }
 
         public ObservableObject<Page> Content
