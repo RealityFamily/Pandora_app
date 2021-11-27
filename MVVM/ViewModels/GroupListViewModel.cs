@@ -26,7 +26,7 @@ namespace Pandora.MVVM.ViewModels
             get
             {
                 var groups = GroupsNetworkLogic.GetGroups();
-                groups.Insert(0, new Group(null, "Скаченное"));
+                groups.Insert(0, new Group(null, "Скачанное"));
                 return groups;
             }
         }
@@ -43,7 +43,7 @@ namespace Pandora.MVVM.ViewModels
                 if (_choosedGroup.Value != null && !string.IsNullOrEmpty(_choosedGroup.Value.category))
                 {
                     new LocalServiceLocator().ItemInfoViewModel.ChoosedItem.Value = null;
-                    if ((_subGroups != null && _subGroups.Any(group => group.id == _choosedGroup.Value.id)) || _choosedGroup.Value.category.Equals("Скаченное"))
+                    if ((_subGroups != null && _subGroups.Any(group => group.id == _choosedGroup.Value.id)) || _choosedGroup.Value.category.Equals("Скачанное"))
                     {
                         new LocalServiceLocator().ListOfGroupViewModel.SetData(_choosedGroup.Value.id);
                     }

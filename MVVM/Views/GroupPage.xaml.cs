@@ -35,7 +35,7 @@ namespace Pandora.MVVM.Views
         {
             Group selected = (Group)((ListBox)e.OriginalSource).SelectedItem;
 
-            if (selected.category.Equals("Скаченное"))
+            if (selected.category.Equals("Скачанное"))
             {
                 content.Content = new ListOfObjects(nextColor);
                 mViewModel.ChoosedGroup.Value = selected;

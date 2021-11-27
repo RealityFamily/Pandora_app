@@ -29,8 +29,11 @@ namespace Pandora
                 content.Content = mViewModel.Content.Value;
             };
 
-
-            PersonName.Content = serviceLocator.UserViewModel.User.Value.Equals("Войдите для полного доступа к моделям") ? serviceLocator.UserViewModel.User.Value : "Выйти из: " + serviceLocator.UserViewModel.User.Value;
+            String userField = serviceLocator.UserViewModel.User.Value;
+            if (userField != null)
+            {
+                PersonName.Content = serviceLocator.UserViewModel.User.Value.Equals("Войдите для полного доступа к моделям") ? serviceLocator.UserViewModel.User.Value : "Выйти из: " + serviceLocator.UserViewModel.User.Value;
+            }
 
             serviceLocator.UserViewModel.User.PropertyChanged += (sender, e) => 
             {
