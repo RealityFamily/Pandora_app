@@ -9,7 +9,7 @@ namespace Pandora.Network
 {
     public class NetworkLogic
     {
-        protected static string BaseURL = "https://pandora.dev.realityfamily.ru/";
+        protected static string BaseURL = "https://pandora.diskill.ru/";
 
         public static T DownloadString<T> (string url)
         {

@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Pandora": {
+      "commandName": "Project",
+      "remoteDebugEnabled": true,
+      "remoteDebugMachine": "DESKTOP-DK5HQGM",
+      "authenticationMode": "None",
+      "nativeDebugging": false
+    }
+  }
+}

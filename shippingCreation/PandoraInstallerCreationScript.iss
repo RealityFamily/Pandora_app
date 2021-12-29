@@ -2,15 +2,15 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Pandora"
-#define MyAppVersion "1.1"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "Diskill"
 #define MyAppURL "https://www.diskill.ru/"
 #define MyAppExeName "Pandora.exe"
 
+
 ; .Net 5 installer
 #pragma include __INCLUDE__ + ";" + "W:\Program Files (x86)\Inno Download Plugin"
 #include <idp.iss>
-
 
 
 [Setup]
@@ -26,9 +26,8 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
-; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
-PrivilegesRequired=admin 
+; Remove the following line to run in administrative install mode (install for all users.)
+PrivilegesRequired=admin
 OutputDir=D:\Desktop\pandora
 OutputBaseFilename=PandoraInstaller
 SetupIconFile=W:\Projects\_GitHub\_RealityFamilyRepo\Pandora_app\image 20 (1).ico
@@ -44,8 +43,28 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "D:\Desktop\net5.0-windows\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+
+;Source: "D:\Desktop\net5.0-windows\de\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Desktop\net5.0-windows\de\MahApps.Metro.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+
+Source: "D:\Desktop\net5.0-windows\Models"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+;Source: "D:\Desktop\net5.0-windows\ref\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Desktop\net5.0-windows\ref\Pandora.dll"; DestDir: "{app}\ref"; Flags: ignoreversion
+
+;Source: "D:\Desktop\net5.0-windows\resources\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Desktop\net5.0-windows\resources\drawable\instruction.png"; DestDir: "{app}\resources\drawable"; Flags: ignoreversion
+
+;Source: "D:\Desktop\net5.0-windows\Scripts\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "D:\Desktop\net5.0-windows\Scripts\3Ds_Max\pandora-loader.ms"; DestDir: "{app}\Scripts\3Ds_Max"; Flags: ignoreversion
+Source: "D:\Desktop\net5.0-windows\Scripts\Model\MaxMaterial.ms"; DestDir: "{app}\Scripts\Model"; Flags: ignoreversion
+Source: "D:\Desktop\net5.0-windows\Scripts\Model\Model.ms"; DestDir: "{app}\Scripts\Model"; Flags: ignoreversion
+
+Source: "D:\Desktop\net5.0-windows\Zip"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+
 Source: "D:\Desktop\net5.0-windows\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Desktop\net5.0-windows\ControlzEx.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Desktop\net5.0-windows\dotnet.pas"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Desktop\net5.0-windows\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Desktop\net5.0-windows\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\Desktop\net5.0-windows\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -93,6 +112,7 @@ Source: "D:\Desktop\net5.0-windows\System.Windows.Interactivity.dll"; DestDir: "
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+
 
 
 
@@ -265,8 +285,6 @@ begin
   Result := requiresRestart;
 end;
 
-
 [Run]
 ;Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-
 
